@@ -1,40 +1,42 @@
-constructor() {
-    manager = msg.sender;
-    lotteryId = 1;
-}
+Decentralized To-Do List
 
-function enter() public payable {
-    require(msg.value == 0.01 ether, "Entry fee is 0.01 ETH");
-    players.push(msg.sender);
-}
+Project Description
 
-function getPlayers() public view returns (address[] memory) {
-    return players;
-}
+The Decentralized To-Do List is a blockchain-powered task manager where users can create, toggle, view, and delete their personal tasks without any centralized server. Each user's data is securely stored on-chain and is only accessible to them.
 
-function pickWinner() public restricted {
-    require(players.length > 0, "No players entered");
-    uint winnerIndex = random() % players.length;
-    address winner = players[winnerIndex];
-    lastWinner = winner;
-    lotteryHistory[lotteryId] = winner;
-    lotteryId++;
-    payable(winner).transfer(address(this).balance);
-    players = new address[](0); // ✅ Correct way to reset the dynamic array
-}
+Project Vision
 
-function getLastWinner() public view returns (address) {
-    return lastWinner;
-}
+To provide a censorship-resistant and persistent task management tool that leverages the transparency and immutability of blockchain technology. Users retain full control and ownership over their task data.
 
-function random() private view returns (uint) {
-    return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players)));
-}
+Key Features
 
-modifier restricted() {
-    require(msg.sender == manager, "Only the manager can call this function");
-    _;
-}
+Add Task: Users can add new tasks that are recorded on-chain.
+
+Toggle Task Completion: Tasks can be marked as completed or incomplete.
+
+View My Tasks: Each user can view only their own list of tasks.
+
+Delete Task: Users can remove tasks from their list.
+
+Personalized Storage: All tasks are mapped per user address.
+
+Future Scope
+
+Enable tagging and prioritization of tasks.
+
+Add due dates and reminders via event logs.
+
+Integrate frontend DApp with wallet connection.
+
+Support cross-device syncing using decentralized storage.
+
+Add batch operations (mark all as done, delete all, etc).
+
+Contract Details
+
+Contract Address: [To be filled by Judy]Deployed By: [To be filled by Judy]Contract ABI: [To be filled by Judy]Explorer Link: [To be filled by Judy]
+
+
 
 ![image](https://github.com/user-attachments/assets/daeaec5a-251a-413c-ac62-a964533d6ebe)
 
